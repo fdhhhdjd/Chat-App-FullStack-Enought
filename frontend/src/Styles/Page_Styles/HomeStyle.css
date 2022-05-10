@@ -1,0 +1,12 @@
+.home_bg {
+  background-image: url(https://media.istockphoto.com/photos/planet-earth-at-night-city-lights-of-europe-glowing-in-the-dark-picture-id1299972938);
+  height: 92vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+.home-message-icon {
+  margin-left: 10px;
+  display: inline-block;
+}
