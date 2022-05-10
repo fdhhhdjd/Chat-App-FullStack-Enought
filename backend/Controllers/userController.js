@@ -36,6 +36,8 @@ const userCtrl = {
           status: false,
           user,
         });
+      user.status = "online";
+      await user.save();
       delete user.password;
       return res.json({ status: true, msg: "Đăng nhập thành công !", user });
     } catch (ex) {

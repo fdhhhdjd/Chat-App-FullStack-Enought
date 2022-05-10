@@ -6,6 +6,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import resetNotify from "../Redux/AuthSlice";
 import AddNotify from "../Redux/AuthSlice";
+import { resetNotifications, AddNotifications } from "../Redux/AuthSlice";
 const SideBar = () => {
   const {
     user,
@@ -36,14 +37,14 @@ const SideBar = () => {
     if (isPublic) {
       setPrivateMemberMsg(null);
     }
-    let message = "message";
-    // dispatch(resetNotify(room));
-    setNotify([]);
+    dispatch(resetNotifications(room));
 
     socket.off("notifications").on("notifications", (room) => {
       if (currentRoom !== room) {
-        setNotify((notify) => [...notify, room]);
+        dispatch(AddNotifications(room));
+        // setNotify((notify) => [...notify, room]);
       }
+      dispatch(AddNotifications(room));
     });
   };
   const orderIds = (id1, id2) => {
@@ -76,7 +77,6 @@ const SideBar = () => {
       res.json({}).then((data) => setRooms(data));
     });
   };
-  console.log(rooms);
   return (
     <React.Fragment>
       <h2>Phòng Mở chung </h2>

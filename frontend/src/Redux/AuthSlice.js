@@ -46,18 +46,16 @@ const AuthSlice = createSlice({
   name: "Auth",
   initialState,
   reducers: {
-    resetNotify: (state, { payload }) => {
-      console.log(state, "-----", payload);
-      delete state.newMessage[payload];
-    },
-    AddNotify: (state, { payload }) => {
-      console.log(state, "-----xin chao----", payload);
-
-      if (state.newMessage[payload]) {
-        state.newMessage[payload] = state.newMessage[payload] + 1;
+    resetNotifications: (state, { payload }) => {
+      console.log(state.messages[payload], "aloooooooooooooooo");
+      if (state.newMessages[payload]) {
+        state.newMessages[payload] = state.newMessages[payload] + 1;
       } else {
-        state.newMessage[payload] = 1;
+        state.newMessages[payload] = 1;
       }
+    },
+    AddNotifications: (state, { payload }) => {
+      delete state.newMessages[payload];
     },
   },
   extraReducers: {
@@ -100,5 +98,5 @@ const AuthSlice = createSlice({
   },
 });
 const Auth = AuthSlice.reducer;
-export const { reset } = AuthSlice.actions;
+export const { resetNotifications, AddNotifications } = AuthSlice.actions;
 export default Auth;

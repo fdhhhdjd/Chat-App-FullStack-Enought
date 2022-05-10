@@ -87,7 +87,6 @@ io.on("connection", (socket) => {
       date,
       to: room,
     });
-    console.log(newMessage);
     let roomMessages = await getLastMessageFromRoom(room);
     roomMessages = SortRoomMessageByDate(roomMessages);
     //send message

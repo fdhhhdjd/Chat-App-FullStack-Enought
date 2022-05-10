@@ -56,12 +56,12 @@ const MessageForm = () => {
   return (
     <React.Fragment>
       <div className="message-output">
-        {user && !privateMemberMsg?.id && (
+        {user && !privateMemberMsg?._id && (
           <div className="alert alert-info">
             You are in the {currentRoom} room
           </div>
         )}
-        {user && privateMemberMsg?.id && (
+        {user && privateMemberMsg?._id && (
           <div className="alert alert-info conversation-info">
             <span>
               You are in the {privateMemberMsg.name}{" "}
