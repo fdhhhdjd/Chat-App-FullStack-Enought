@@ -100,7 +100,7 @@ io.on("connection", (socket) => {
       const { user } = req.body;
       const users = await Users.findById(user._id);
       users.status = "offline";
-      users.newMessage = newMessage;
+      users.newMessage = user.newMessage;
       await users.save();
       const members = await Users.find();
       socket.broadcast.emit("new-user", members);
