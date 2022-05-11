@@ -87,6 +87,7 @@ io.on("connection", (socket) => {
       date,
       to: room,
     });
+
     let roomMessages = await getLastMessageFromRoom(room);
     roomMessages = SortRoomMessageByDate(roomMessages);
     //send message
@@ -97,10 +98,9 @@ io.on("connection", (socket) => {
   app.post("/logout", async (req, res) => {
     try {
       const { user } = req.body;
-
       const users = await Users.findById(user._id);
       users.status = "offline";
-      users.newMessage = user.newMessage;
+      users.newMessage = newMessage;
       await users.save();
       const members = await Users.find();
       socket.broadcast.emit("new-user", members);

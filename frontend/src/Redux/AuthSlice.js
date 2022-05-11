@@ -15,8 +15,6 @@ export const RegisterInitial = createAsyncThunk(
 export const LoginInitial = createAsyncThunk(
   "Auth/LoginAuth",
   async ({ LoginRoute, email, password }) => {
-    console.log(email, password);
-
     const response = await axios.post(LoginRoute, { email, password });
     return response.data;
   }
@@ -47,15 +45,15 @@ const AuthSlice = createSlice({
   initialState,
   reducers: {
     resetNotifications: (state, { payload }) => {
-      console.log(state.messages[payload], "aloooooooooooooooo");
-      if (state.newMessages[payload]) {
-        state.newMessages[payload] = state.newMessages[payload] + 1;
+      console.log(state.message[payload], "aloooooooooooooooo");
+      if (state.newMessage[payload]) {
+        state.newMessage[payload] = state.newMessage[payload] + 1;
       } else {
-        state.newMessages[payload] = 1;
+        state.newMessage[payload] = 1;
       }
     },
     AddNotifications: (state, { payload }) => {
-      delete state.newMessages[payload];
+      delete state.newMessage[payload];
     },
   },
   extraReducers: {

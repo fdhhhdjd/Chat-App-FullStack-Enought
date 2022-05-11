@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { avatar } from "../Import/ImportImg";
 import { RegisterInitial } from "../Redux/AuthSlice";
 import "../Styles/Page_Styles/Signup_Style.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RegisterRoute } from "../utils/ApiRoutes";
 const initialState = {
   name: "",
@@ -18,6 +18,7 @@ const Signup = () => {
   const [state, setState] = useState(initialState);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
+  const { loadings } = useSelector((state) => state.auth);
   const [errorName, setErrorName] = useState(null);
   const navigate = useNavigate();
   const [errorEmail, setErrorEmail] = useState(null);
@@ -98,7 +99,6 @@ const Signup = () => {
   };
   const handleSignUp = async (e) => {
     e.preventDefault();
-
     const url = await uploadImage(image);
     if (handleValidation()) {
       dispatch(
@@ -220,7 +220,7 @@ const Signup = () => {
                 <Form.Check type="checkbox" label="Nhớ mật khẩu" />
               </Form.Group>
               <Button variant="primary" type="submit">
-                Đăng ký ngay
+                {loadings ? <Spinner animation="grow" /> : "Đăng ký ngay"}
               </Button>
               <div className="py-4">
                 <p className="text-center">

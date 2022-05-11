@@ -37,14 +37,14 @@ const SideBar = () => {
     if (isPublic) {
       setPrivateMemberMsg(null);
     }
-    dispatch(resetNotifications(room));
+    // dispatch(resetNotifications(room));
 
     socket.off("notifications").on("notifications", (room) => {
-      if (currentRoom !== room) {
-        dispatch(AddNotifications(room));
-        // setNotify((notify) => [...notify, room]);
-      }
-      dispatch(AddNotifications(room));
+      // if (currentRoom !== room) {
+      // dispatch(AddNotifications(room));
+      console.log(room, "room");
+      // setNotify((notify) => [...notify, room]);
+      // }
     });
   };
   const orderIds = (id1, id2) => {
@@ -82,26 +82,24 @@ const SideBar = () => {
       <h2>Phòng Mở chung </h2>
       {rooms?.map((item, index) => {
         return (
-          <>
-            <ListGroup.Item
-              key={index}
-              onClick={() => joinRoom(item)}
-              style={{
-                cursor: "pointer",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-              active={item == currentRoom}
-            >
-              {item}{" "}
-              {currentRoom !== item && (
-                <span className="badge rounded-pill bg-primary">
-                  {/* {notify.length === 0 ? "" : notify.length} */}
-                  {user.newMessage[item]}
-                </span>
-              )}
-            </ListGroup.Item>
-          </>
+          <ListGroup.Item
+            key={index}
+            onClick={() => joinRoom(item)}
+            style={{
+              cursor: "pointer",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+            active={item == currentRoom}
+          >
+            {item}{" "}
+            {currentRoom !== item && (
+              <span className="badge rounded-pill bg-primary">
+                {/* {notify.length === 0 ? "" : notify.length} */}
+                {user.newMessage[item]}
+              </span>
+            )}
+          </ListGroup.Item>
         );
       })}
       <h2>Các thành viên </h2>

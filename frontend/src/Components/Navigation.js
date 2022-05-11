@@ -6,6 +6,7 @@ import { logo } from "../Import/ImportImg";
 import { LogoutInitial } from "../Redux/AuthSlice";
 import { LogoutRoute } from "../utils/ApiRoutes";
 import { useDispatch, useSelector } from "react-redux";
+import { useMyContext } from "../useContext/GlobalState";
 const Navigation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Navigation = () => {
   const { auth } = useSelector((state) => ({
     ...state.auth,
   }));
+  const { messages } = useMyContext();
   useEffect(() => {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/chat");
